@@ -3,7 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 7000;
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
@@ -20,6 +20,10 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+app.get('/download', function (req, res){
+    res.download(__dirname + '/public/files/Resume.pdf', 'Resume.pdf');
+    
+})
 // Import routes and give the server access to them.
 var routes = require("./models/controller");
 
